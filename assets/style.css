@@ -1,0 +1,396 @@
+/* assets/style.css */
+
+/* ── Google Font Import ──────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ── Root Variables ──────────────────────────────────────────────────────── */
+:root {
+    --bg-primary      : #0e1117;
+    --bg-secondary    : #161b22;
+    --bg-card         : #1c2128;
+    --accent-green    : #26a69a;
+    --accent-red      : #ef5350;
+    --accent-blue     : #3498db;
+    --accent-yellow   : #f39c12;
+    --accent-purple   : #9b59b6;
+    --text-primary    : #e6edf3;
+    --text-secondary  : #8b949e;
+    --border-color    : #30363d;
+    --glow-green      : rgba(38, 166, 154, 0.3);
+    --glow-red        : rgba(239, 83, 80, 0.3);
+    --glow-blue       : rgba(52, 152, 219, 0.3);
+}
+
+/* ── Global Reset ────────────────────────────────────────────────────────── */
+* {
+    margin        : 0;
+    padding       : 0;
+    box-sizing    : border-box;
+}
+
+/* ── Main App Background ─────────────────────────────────────────────────── */
+.stApp {
+    background-color : var(--bg-primary) !important;
+    font-family      : 'Inter', sans-serif !important;
+    color            : var(--text-primary) !important;
+}
+
+/* ── Hide Streamlit Default Elements ─────────────────────────────────────── */
+#MainMenu  { visibility : hidden; }
+footer     { visibility : hidden; }
+header     { visibility : hidden; }
+
+/* ── Scrollbar Styling ───────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+    width  : 6px;
+    height : 6px;
+}
+::-webkit-scrollbar-track {
+    background : var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+    background    : var(--accent-blue);
+    border-radius : 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background : var(--accent-purple);
+}
+
+/* ── Header / Title ──────────────────────────────────────────────────────── */
+.main-header {
+    text-align      : center;
+    padding         : 2rem 0 1rem 0;
+    background      : linear-gradient(
+                        135deg,
+                        var(--bg-secondary) 0%,
+                        var(--bg-card) 100%
+                      );
+    border-radius   : 16px;
+    border          : 1px solid var(--border-color);
+    margin-bottom   : 2rem;
+}
+
+.main-header h1 {
+    font-size       : 2.4rem;
+    font-weight     : 700;
+    background      : linear-gradient(
+                        90deg,
+                        var(--accent-green),
+                        var(--accent-blue),
+                        var(--accent-purple)
+                      );
+    -webkit-background-clip : text;
+    -webkit-text-fill-color : transparent;
+    background-clip         : text;
+    letter-spacing  : -0.5px;
+}
+
+.main-header p {
+    color       : var(--text-secondary);
+    font-size   : 0.95rem;
+    margin-top  : 0.4rem;
+}
+
+/* ── Metric Cards ────────────────────────────────────────────────────────── */
+.metric-card {
+    background      : var(--bg-card);
+    border          : 1px solid var(--border-color);
+    border-radius   : 12px;
+    padding         : 1.2rem 1.5rem;
+    text-align      : center;
+    transition      : all 0.3s ease;
+    position        : relative;
+    overflow        : hidden;
+}
+
+.metric-card:hover {
+    border-color    : var(--accent-blue);
+    transform       : translateY(-3px);
+    box-shadow      : 0 8px 25px var(--glow-blue);
+}
+
+.metric-card::before {
+    content         : '';
+    position        : absolute;
+    top             : 0;
+    left            : 0;
+    right           : 0;
+    height          : 3px;
+    background      : linear-gradient(
+                        90deg,
+                        var(--accent-green),
+                        var(--accent-blue)
+                      );
+}
+
+.metric-value {
+    font-size       : 1.8rem;
+    font-weight     : 700;
+    color           : var(--text-primary);
+    font-family     : 'JetBrains Mono', monospace;
+}
+
+.metric-label {
+    font-size       : 0.8rem;
+    color           : var(--text-secondary);
+    text-transform  : uppercase;
+    letter-spacing  : 1px;
+    margin-top      : 0.3rem;
+}
+
+/* ── Prediction Badge ────────────────────────────────────────────────────── */
+.prediction-bullish {
+    background      : linear-gradient(
+                        135deg,
+                        rgba(38, 166, 154, 0.2),
+                        rgba(38, 166, 154, 0.05)
+                      );
+    border          : 2px solid var(--accent-green);
+    border-radius   : 16px;
+    padding         : 2rem;
+    text-align      : center;
+    box-shadow      : 0 0 30px var(--glow-green);
+    animation       : pulse-green 2s infinite;
+}
+
+.prediction-bearish {
+    background      : linear-gradient(
+                        135deg,
+                        rgba(239, 83, 80, 0.2),
+                        rgba(239, 83, 80, 0.05)
+                      );
+    border          : 2px solid var(--accent-red);
+    border-radius   : 16px;
+    padding         : 2rem;
+    text-align      : center;
+    box-shadow      : 0 0 30px var(--glow-red);
+    animation       : pulse-red 2s infinite;
+}
+
+.prediction-text {
+    font-size       : 2.5rem;
+    font-weight     : 700;
+    letter-spacing  : 2px;
+}
+
+.prediction-text.bullish { color: var(--accent-green); }
+.prediction-text.bearish { color: var(--accent-red);   }
+
+/* ── Animations ──────────────────────────────────────────────────────────── */
+@keyframes pulse-green {
+    0%, 100% { box-shadow: 0 0 20px var(--glow-green); }
+    50%       { box-shadow: 0 0 40px rgba(38, 166, 154, 0.5); }
+}
+
+@keyframes pulse-red {
+    0%, 100% { box-shadow: 0 0 20px var(--glow-red); }
+    50%       { box-shadow: 0 0 40px rgba(239, 83, 80, 0.5); }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity   : 0;
+        transform : translateY(20px);
+    }
+    to {
+        opacity   : 1;
+        transform : translateY(0);
+    }
+}
+
+.fade-in {
+    animation : fadeInUp 0.6s ease forwards;
+}
+
+/* ── Section Cards ───────────────────────────────────────────────────────── */
+.section-card {
+    background      : var(--bg-card);
+    border          : 1px solid var(--border-color);
+    border-radius   : 12px;
+    padding         : 1.5rem;
+    margin-bottom   : 1.5rem;
+    transition      : border-color 0.3s ease;
+}
+
+.section-card:hover {
+    border-color : var(--accent-blue);
+}
+
+.section-title {
+    font-size       : 1.1rem;
+    font-weight     : 600;
+    color           : var(--text-primary);
+    margin-bottom   : 1rem;
+    padding-bottom  : 0.5rem;
+    border-bottom   : 1px solid var(--border-color);
+}
+
+/* ── Info Box ────────────────────────────────────────────────────────────── */
+.info-box {
+    background      : rgba(52, 152, 219, 0.1);
+    border          : 1px solid rgba(52, 152, 219, 0.4);
+    border-left     : 4px solid var(--accent-blue);
+    border-radius   : 8px;
+    padding         : 1rem 1.2rem;
+    margin          : 1rem 0;
+    color           : var(--text-primary);
+    font-size       : 0.9rem;
+}
+
+.warning-box {
+    background      : rgba(243, 156, 18, 0.1);
+    border          : 1px solid rgba(243, 156, 18, 0.4);
+    border-left     : 4px solid var(--accent-yellow);
+    border-radius   : 8px;
+    padding         : 1rem 1.2rem;
+    margin          : 1rem 0;
+    color           : var(--text-primary);
+    font-size       : 0.9rem;
+}
+
+.success-box {
+    background      : rgba(38, 166, 154, 0.1);
+    border          : 1px solid rgba(38, 166, 154, 0.4);
+    border-left     : 4px solid var(--accent-green);
+    border-radius   : 8px;
+    padding         : 1rem 1.2rem;
+    margin          : 1rem 0;
+    color           : var(--text-primary);
+    font-size       : 0.9rem;
+}
+
+/* ── Sidebar ─────────────────────────────────────────────────────────────── */
+[data-testid="stSidebar"] {
+    background-color : var(--bg-secondary) !important;
+    border-right     : 1px solid var(--border-color) !important;
+}
+
+[data-testid="stSidebar"] .stMarkdown h1,
+[data-testid="stSidebar"] .stMarkdown h2,
+[data-testid="stSidebar"] .stMarkdown h3 {
+    color : var(--text-primary) !important;
+}
+
+/* ── Buttons ─────────────────────────────────────────────────────────────── */
+.stButton > button {
+    background      : linear-gradient(
+                        135deg,
+                        var(--accent-blue),
+                        var(--accent-purple)
+                      ) !important;
+    color           : white !important;
+    border          : none !important;
+    border-radius   : 8px !important;
+    padding         : 0.6rem 2rem !important;
+    font-weight     : 600 !important;
+    font-size       : 0.95rem !important;
+    letter-spacing  : 0.5px !important;
+    transition      : all 0.3s ease !important;
+    width           : 100% !important;
+}
+
+.stButton > button:hover {
+    transform       : translateY(-2px) !important;
+    box-shadow      : 0 6px 20px var(--glow-blue) !important;
+    opacity         : 0.95 !important;
+}
+
+.stButton > button:active {
+    transform : translateY(0) !important;
+}
+
+/* ── File Uploader ───────────────────────────────────────────────────────── */
+[data-testid="stFileUploader"] {
+    background      : var(--bg-card) !important;
+    border          : 2px dashed var(--border-color) !important;
+    border-radius   : 12px !important;
+    transition      : border-color 0.3s ease !important;
+}
+
+[data-testid="stFileUploader"]:hover {
+    border-color : var(--accent-blue) !important;
+}
+
+/* ── Tabs ────────────────────────────────────────────────────────────────── */
+.stTabs [data-baseweb="tab-list"] {
+    background      : var(--bg-secondary) !important;
+    border-radius   : 10px !important;
+    padding         : 0.3rem !important;
+    gap             : 0.3rem !important;
+}
+
+.stTabs [data-baseweb="tab"] {
+    background      : transparent !important;
+    color           : var(--text-secondary) !important;
+    border-radius   : 8px !important;
+    font-weight     : 500 !important;
+    transition      : all 0.3s ease !important;
+}
+
+.stTabs [aria-selected="true"] {
+    background      : var(--accent-blue) !important;
+    color           : white !important;
+}
+
+/* ── Progress Bar ────────────────────────────────────────────────────────── */
+.stProgress > div > div {
+    background      : linear-gradient(
+                        90deg,
+                        var(--accent-green),
+                        var(--accent-blue)
+                      ) !important;
+    border-radius   : 10px !important;
+}
+
+/* ── Dataframe ───────────────────────────────────────────────────────────── */
+[data-testid="stDataFrame"] {
+    background      : var(--bg-card) !important;
+    border-radius   : 10px !important;
+    border          : 1px solid var(--border-color) !important;
+}
+
+/* ── Feature Importance Bar ──────────────────────────────────────────────── */
+.feature-bar-container {
+    margin          : 0.5rem 0;
+}
+
+.feature-bar-label {
+    display         : flex;
+    justify-content : space-between;
+    font-size       : 0.85rem;
+    color           : var(--text-secondary);
+    margin-bottom   : 0.3rem;
+}
+
+.feature-bar-track {
+    background      : var(--bg-secondary);
+    border-radius   : 10px;
+    height          : 8px;
+    overflow        : hidden;
+}
+
+.feature-bar-fill {
+    height          : 100%;
+    border-radius   : 10px;
+    background      : linear-gradient(
+                        90deg,
+                        var(--accent-blue),
+                        var(--accent-purple)
+                      );
+    transition      : width 0.8s ease;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .main-header h1 {
+        font-size : 1.6rem;
+    }
+
+    .prediction-text {
+        font-size : 1.8rem;
+    }
+
+    .metric-value {
+        font-size : 1.4rem;
+    }
+}
